@@ -137,6 +137,20 @@ public:
     int searchRec(int key) {
         return helper(head,key);
     }
+    void reverse() {
+        Node* prev = NULL;
+        Node* curr = head;
+
+        while (curr != NULL) {
+            Node* next = curr->next;
+            curr->next = prev;
+
+            //updation
+            prev = curr;
+            curr = next;
+        }
+        head = prev;
+    }
 };
 
 int main(){
@@ -146,7 +160,9 @@ int main(){
     ll.push_front(1);
     ll.push_back(4);
     ll.search(99);
-    cout << ll.searchRec(2);
+    ll.printList();
+    ll.reverse();
+    ll.printList();
 
     return 0;
 }
