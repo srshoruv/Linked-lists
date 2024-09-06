@@ -104,6 +104,22 @@ public:
         tail = temp;
 
     }
+
+    int search(int key) {
+        Node* temp = head;
+        int idx = 0;
+        while (temp != NULL) {
+            if (temp->val == key) {
+                cout << "Found at -> " << idx << endl;
+                return idx;
+            }
+            temp = temp->next;
+            idx++;
+        }
+        cout << "-1" << endl;
+        return -1;
+        
+    }
 };
 
 int main(){
@@ -114,6 +130,7 @@ int main(){
     ll.push_back(4);
     ll.pop_back();
     ll.printList();
+    ll.search(99);
 
     return 0;
 }
