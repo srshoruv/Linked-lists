@@ -72,11 +72,25 @@ public:
         for (int i=0; i<pos-1; i++) {
             if (temp == NULL) {
                 cout << "Invalid Position!";
+                return;
             }
             temp = temp->next;
         }
         newNode->next = temp->next;
         temp->next = newNode;
+    }
+
+    void pop_front() {
+        if (head==NULL) {
+            cout << "Already empty"<< endl;
+            return;
+        } else {
+        Node* temp = head;
+        head = head->next;
+        temp->next = NULL;
+        delete temp;
+        }
+        
     }
 };
 
@@ -86,8 +100,10 @@ int main(){
     ll.push_front(2);
     ll.push_front(1);
     ll.push_back(4);
-    ll.printList();
     ll.insert(100,2);
     ll.printList();
+    ll.pop_front();
+    ll.printList();
+
     return 0;
 }
