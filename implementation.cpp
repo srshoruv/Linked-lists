@@ -10,6 +10,13 @@ public:
         this->val = val;
         next = NULL;
     }
+
+    ~Node(){
+        if (next != NULL) {
+            delete next;
+            next = NULL;
+        }
+    }
 };
 
 class List{
@@ -20,6 +27,13 @@ public:
     List(){
         head = NULL;
         tail = NULL;
+    }
+
+    ~List() {
+        if (head != NULL) {
+            delete head;
+            head = NULL;
+        }
     }
 
     void push_front(int val) {
