@@ -120,6 +120,23 @@ public:
         return -1;
         
     }
+    int helper(Node* temp, int key) {
+        if (temp == NULL) {
+            return -1;
+        }
+        if (temp->val == key) {
+            return 0;
+        }
+
+        int idx = helper(temp->next, key);
+        if (idx == -1) {
+            return -1;
+        }
+        return idx + 1;
+    }
+    int searchRec(int key) {
+        return helper(head,key);
+    }
 };
 
 int main(){
@@ -128,9 +145,8 @@ int main(){
     ll.push_front(2);
     ll.push_front(1);
     ll.push_back(4);
-    ll.pop_back();
-    ll.printList();
     ll.search(99);
+    cout << ll.searchRec(2);
 
     return 0;
 }
