@@ -151,6 +151,23 @@ public:
         }
         head = prev;
     }
+    int getSize() {
+        Node* temp = head;
+        int size = 0;
+        while (temp !=NULL) {
+            temp = temp->next;
+            size++;
+        }
+        return size;  
+    }
+    void removeNth(int n) {
+        Node* prev = head;
+        int size = getSize();
+        for (int i=1; i<(size-n); i++) {
+            prev = prev->next;
+        }
+        prev->next = prev->next->next;
+    }
 };
 
 int main(){
@@ -161,7 +178,7 @@ int main(){
     ll.push_back(4);
     ll.search(99);
     ll.printList();
-    ll.reverse();
+    ll.removeNth(3);
     ll.printList();
 
     return 0;
