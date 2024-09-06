@@ -63,7 +63,7 @@ public:
         while (temp != NULL) {
             cout << temp->val << "->";
             temp = temp->next;
-        } cout << "NULL";
+        } cout << "NULL" << endl;
     }
 
     void insert(int val, int pos) {
@@ -92,6 +92,18 @@ public:
         }
         
     }
+
+    void pop_back() {
+        Node* temp = head;
+
+        while (temp->next->next != NULL) {
+            temp = temp->next;
+        }
+        temp->next = NULL;
+        delete tail;
+        tail = temp;
+
+    }
 };
 
 int main(){
@@ -100,9 +112,7 @@ int main(){
     ll.push_front(2);
     ll.push_front(1);
     ll.push_back(4);
-    ll.insert(100,2);
-    ll.printList();
-    ll.pop_front();
+    ll.pop_back();
     ll.printList();
 
     return 0;
