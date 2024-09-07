@@ -48,14 +48,15 @@ public:
         }
     }
 
-    void printList() {
+};
+
+void printList(Node* head) {
         Node* temp = head;
         while (temp != NULL) {
             cout << temp->val << "->";
             temp = temp->next;
         } cout << "NULL" << endl;
     }
-};
 
 bool isCycle(Node* head) {
     Node* slow = head;
@@ -74,6 +75,43 @@ bool isCycle(Node* head) {
     return false;
 }
 
+void removeCycle(Node* head) {
+    Node* slow = head;
+    Node* fast = head;
+    //checking cycle
+    bool isCycle = false;
+
+    while (slow!=fast) {
+        slow = slow->next;
+        fast = fast->next->next; }
+        if (slow==fast) {
+            isCycle = true;
+            cout << "Cycle exists! \n";
+        }
+
+    if(!isCycle) {
+        cout << "Cycle does not exist." << endl;
+        return;
+    }
+
+    slow = head;
+    
+    if (slow==fast) {
+        while (fast->next!=slow) {
+            fast = fast->next;
+        } fast->next = NULL; //removed cycle
+    } else {
+        Node* prev = fast;
+        while (slow!=fast) {
+            
+            slow = slow->next;
+            prev = fast;
+            fast = fast->next;
+        } 
+        prev->next = NULL; //removed cycle;
+    }
+}
+
 int main(){
     List ll;
     ll.push_front(1);
@@ -81,7 +119,8 @@ int main(){
     ll.push_front(2);
     ll.push_front(1);
     ll.tail->next = ll.head;
-    isCycle(ll.head);
+    removeCycle(ll.head);
+    printList(ll.head);
 
     return 0;
 }
