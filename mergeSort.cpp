@@ -124,6 +124,48 @@ Node* mergeSort(Node* head) {
 
     return merge(left,right);
 }
+Node* reverse(Node* head) {
+        Node* prev = NULL;
+        Node* curr = head;
+
+        while (curr != NULL) {
+            Node* next = curr->next;
+            curr->next = prev;
+
+            //updation
+            prev = curr;
+            curr = next;
+        }
+        head = prev;
+        return head;
+    }
+
+Node* zigZagLL(Node* head) {
+    Node* rightHead = splitMid(head);
+    Node* rightHeadRev = reverse(rightHead);
+
+    //alternation
+    Node* left = head;
+    Node* right = rightHeadRev;
+    Node* tail = right;
+
+    while (left && right) {
+        Node* leftNxt = left->next;
+        Node* rightNxt = right->next;
+
+        left->next = right;
+        right->next = leftNxt;
+
+        tail = right;
+
+        right = rightNxt;
+        left = leftNxt;
+    }
+
+    if (!right) {
+        tail->next = right;} 
+        return head;
+}
 
 int main(){
     List ll;
@@ -133,6 +175,6 @@ int main(){
     ll.push_front(4);
     ll.push_front(5);
     printList(ll.head);
-    ll.head = mergeSort(ll.head);
+    ll.head = zigZagLL(ll.head);
     printList(ll.head);
 }
