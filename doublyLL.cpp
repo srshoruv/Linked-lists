@@ -29,10 +29,20 @@ public:
             head = tail = newNode;
         } else {
             newNode->next = head;
-            head->prev = newNode;
+            head->prev = newNode; // extra line for doublyLL
             head = newNode;
         }
         
+    }
+
+    void pop_front() {
+        Node* temp = head;
+        head = head->next;
+
+        if (!head) {
+            head->prev = NULL;
+        }
+        temp->next = NULL;
     }
 
     void printList() {
