@@ -32,9 +32,23 @@ void push_front(int val) {
     }
 }
 
-
-
 };
+
+Node* reverse(Node* head) {
+        Node* prev = NULL;
+        Node* curr = head;
+
+        while (curr != NULL) {
+            Node* next = curr->next;
+            curr->next = prev;
+
+            //updation
+            prev = curr;
+            curr = next;
+        }
+        head = prev;
+        return head;
+    }
 
 void printList(Node* head){
     Node* temp = head;
@@ -44,25 +58,38 @@ void printList(Node* head){
     } cout << "NULL\n";
 }
 
-Node* deleteAfterM(Node* head, int m,int n) {
+Node* swapNNodes(Node* head, int m, int n) {
     Node* temp = head;
-    while (temp) {
-        for (int i=1; i<m; i++) {
+    Node* temp2 = head;
+
+    for (int i=1; i<m && temp; i++) {
         temp = temp->next;
     }
-    Node* afterTemp = temp->next;
-    for(int i=1; i<=n; i++) {
-        afterTemp = afterTemp->next;
+
+    for (int i=1; i<n && temp2; i++) {
+        temp2 = temp2->next;
     }
 
-    temp->next = afterTemp;
-    temp = temp->next;
+    List revLL;
+
+    while (temp != temp2) {
+        revLL.push_front(temp->val);
+        temp = temp->next;
     }
-    
+    cout << "New addition -> ";
+    Node* revHead = revLL.head;
+    head = temp;
+    temp->next = revHead;
+    // printList(revLL.head);
+
+    // cout << "temp -> " << temp->val;
+    // cout << "temp2 -> " << temp2->val;
 
 
     return head;
 }
+
+
 
 int main(){
     List ll;
@@ -76,7 +103,7 @@ int main(){
     ll.push_front(3);
     ll.push_front(2);
     ll.push_front(1);
-    ll.head = deleteAfterM(ll.head,3,2);
+    swapNNodes(ll.head, 2 , 4);
     printList(ll.head);
     return 0;
 }
